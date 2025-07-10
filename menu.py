@@ -46,12 +46,6 @@ def show_menu(screen, clock):
     bg_x, bg_y = 0, 0
     t = 0
 
-    pygame.mixer.init()
-    hover_sound = pygame.mixer.Sound("assets/sounds/hover.wav")
-    select_sound = pygame.mixer.Sound("assets/sounds/select.wav")
-
-    last_selected = selected
-
     while True:
         t += 0.01
         bg_x = int((zoomed_bg.get_width() - screen.get_width()) / 2 + 20 * math.sin(t))
@@ -89,7 +83,6 @@ def show_menu(screen, clock):
                 elif event.key == pygame.K_DOWN:
                     selected = (selected + 1) % len(menu_options)
                 elif event.key == pygame.K_RETURN:
-                    select_sound.play()
                     if selected == 0:
                         select_character(screen, clock)
                     elif selected == 1:
@@ -97,10 +90,6 @@ def show_menu(screen, clock):
                     elif selected == 2:
                         pygame.quit()
                         sys.exit()
-
-        if last_selected != selected:
-            hover_sound.play()
-            last_selected = selected
 
         pygame.display.flip()
         clock.tick(60)
@@ -110,12 +99,6 @@ def select_character(screen, clock):
     title_font = pygame.font.Font(FONT_PATH, 44)
     classes = ["Knight", "Mage", "Dwarf"]
     selected = 0
-
-    pygame.mixer.init()
-    hover_sound = pygame.mixer.Sound("assets/sounds/hover.wav")
-    select_sound = pygame.mixer.Sound("assets/sounds/select.wav")
-
-    last_selected = selected
 
     while True:
         screen.fill((15, 15, 30))
@@ -142,15 +125,10 @@ def select_character(screen, clock):
                 elif event.key == pygame.K_RIGHT:
                     selected = (selected + 1) % len(classes)
                 elif event.key == pygame.K_RETURN:
-                    select_sound.play()
                     if classes[selected] == "Knight":
                         knight_intro(screen, clock)
                 elif event.key == pygame.K_ESCAPE:
                     return
-
-        if last_selected != selected:
-            hover_sound.play()
-            last_selected = selected
 
         pygame.display.flip()
         clock.tick(60)
@@ -159,12 +137,6 @@ def show_options(screen, clock):
     font = pygame.font.Font(FONT_PATH, 48)
     options = ["Fullscreen", "Windowed"]
     selected = 0
-
-    pygame.mixer.init()
-    hover_sound = pygame.mixer.Sound("assets/sounds/hover.wav")
-    select_sound = pygame.mixer.Sound("assets/sounds/select.wav")
-
-    last_selected = selected
 
     while True:
         screen.fill((20, 20, 40))
@@ -196,7 +168,6 @@ def show_options(screen, clock):
                 elif event.key == pygame.K_DOWN:
                     selected = (selected + 1) % len(options)
                 elif event.key == pygame.K_RETURN:
-                    select_sound.play()
                     if options[selected] == "Fullscreen":
                         pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
                     else:
@@ -204,11 +175,6 @@ def show_options(screen, clock):
                     return
                 elif event.key == pygame.K_ESCAPE:
                     return
-
-
-        if last_selected != selected:
-            hover_sound.play()
-            last_selected = selected
 
         pygame.display.flip()
         clock.tick(60)
