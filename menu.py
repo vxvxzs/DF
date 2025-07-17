@@ -19,6 +19,8 @@ def draw_text_with_box(screen, text, font, x, y, text_color, box_color, hover=Fa
 def show_menu(screen, clock, fonts, sounds, switch_mode_callback):
     menu_options = ["New Game", "Options", "Exit"]
     selected = 0
+    if "New Game" found, 
+        menu_options = ["Continue", "New Game", "Options", "Exit"]
 
     background = pygame.image.load("assets/backgrounds/menu_bg.png").convert()
     zoom_factor = 1.4
